@@ -37,6 +37,7 @@ jobs:
       env:
         TNAME: "xy-c1"
       run: |
+        cd /opt/rt-n56u/trunk
         sudo ./clear_tree
         sudo ./build_firmware_modify xy-c1
         sudo mv -f images/*.trx /opt/images/
