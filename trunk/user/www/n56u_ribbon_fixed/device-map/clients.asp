@@ -373,7 +373,7 @@ function networkmap_update(s){
             <th colspan="5" style="text-align: center;"><#ConnectedClient#></th>
         </tr>
         <tr>
-            <th width="8%"><a href="javascript:sort(0)"><#Type#></a></th>
+            <th width="10%"><a href="javascript:sort(0)"><#Type#></a></th>
             <th><a href="javascript:sort(1)"><#Computer_Name#></a></th>
             <th width="20%"><a href="javascript:sort(2)">IP</a></th>
             <th width="24%"><a href="javascript:sort(3)">MAC</a></th>
@@ -392,7 +392,7 @@ function networkmap_update(s){
             <th colspan="5" style="text-align: center;"><#BlockedClient#></th>
         </tr>
         <tr>
-            <th width="8%"><#Type#></th>
+            <th width="10%"><#Type#></th>
             <th><#Computer_Name#></th>
             <th width="20%">IP</th>
             <th width="24%">MAC</th>
