@@ -37,7 +37,7 @@ jobs:
       env:
         TNAME: "xy-c1"
       run: |
-        sudo ./clear_tree_simple
+        sudo ./clear_tree
         sudo ./build_firmware_modify xy-c1
         sudo mv -f images/*.trx /opt/images/
         done
