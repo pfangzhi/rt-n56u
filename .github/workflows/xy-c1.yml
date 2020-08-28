@@ -1,0 +1,52 @@
+name: Build RM2100 R2100
+
+on: 
+  release:
+    types: [published]
+#  push:
+#    tags:
+#    - 'v*'
+  #  branches: 
+  #    - master
+  schedule:
+    - cron: 0 17 * * 4
+#  watch:
+#    types: [started]
+
+jobs:
+  build:
+    runs-on: ubuntu-18.04
+
+    steps:
+    - name: Checkout
+      uses: actions/checkout@master
+    - name: Initialization environment
+      env:
+        DEBIAN_FRONTEND: noninteractive
+      run: |
+        sudo apt-get update
+        sudo apt-get -y install unzip libtool-bin curl cmake gperf gawk flex bison nano xxd fakeroot \
+        cpio git python-docutils gettext automake autopoint texinfo build-essential help2man \
+        pkg-config zlib1g-dev libgmp3-dev libmpc-dev libmpfr-dev libncurses5-dev libltdl-dev wget
+    - name: Clone source code
+      run: |
+        cd toolchain-mipsel
+        sh dl_toolchain.sh
+        mkdir -p /opt/images/
+    - name: Build Firmware
+      env:
+        TNAME: "xy-c1"
+      run: |
+         cp -f configs/templates/$TNAME.config .config
+        sudo ./clear_tree_simple
+        sudo ./build_firmware_modify xy-c1
+        sudo mv -f images/*.trx /opt/images/
+        done
+    - name: Upload binaries to release
+      uses: svenstaro/upload-release-action@v1-release
+      with:
+        repo_token: ${{ secrets.R_TOKEN }}
+        file: /opt/images/*.trx
+        tag: AtuoBuild
+        overwrite: true
+        file_glob: true
