@@ -1,4 +1,4 @@
-name: Build RM2100 R2100
+name: Build xy-c1
 
 on: 
   release:
